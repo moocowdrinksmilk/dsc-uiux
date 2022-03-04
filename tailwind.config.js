@@ -240,6 +240,7 @@ module.exports = {
     },
     fontFamily: {
       sans: [
+        'roboto',
         'ui-sans-serif',
         'system-ui',
         '-apple-system',
