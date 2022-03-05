@@ -1,4 +1,4 @@
-import { ShoppingCartOutlined } from "@ant-design/icons"
+import { ShoppingCartOutlined, CheckCircleOutlined, CheckCircleFilled } from "@ant-design/icons"
 import React, { useState } from "react"
 import Image from 'next/image'
 import numeral from 'numeral'
@@ -10,6 +10,8 @@ interface Cart {
     image: string,
     title: string,
     price: number,
+    checked?: boolean
+    setGlobalChecked: (checked: boolean) => void
 }
 
 
@@ -17,6 +19,7 @@ interface Cart {
 const CartItem = (props: Cart) => {
     const [variation, setVariation] = useState("White")
     const [quantity, setQuantity] = useState(1)
+    const [checked, setChecked] = useState(true)
     const quantityList = [0, 1, 2, 3, 4, 5, 6]
     const variationMenu = (
         <Menu>
@@ -50,8 +53,16 @@ const CartItem = (props: Cart) => {
     )
     return (
         <div className="border-b-2 border-gray-300 py-2 flex flex-row justify-around items-center">
-            <div>
-                tick here
+            <div onClick={() => {setChecked(!checked); props.setGlobalChecked(false)}}>
+                {
+                    !props.checked ? 
+                        checked ? 
+                        <CheckCircleFilled style={{ fontSize: '20px'}} />
+                        :
+                        <CheckCircleOutlined style={{ fontSize: '20px'}} />
+                    :
+                    <CheckCircleFilled style={{ fontSize: '20px'}} />
+                }
         </div>
 
             <Image src={props.image} width={60} height={60} />

@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import styles from '../styles/Home.module.css'
-import { LeftOutlined, DownOutlined, ShoppingCartOutlined } from '@ant-design/icons'
+import { LeftOutlined, DownOutlined, ShoppingCartOutlined, ShoppingOutlined } from '@ant-design/icons'
 import CartItem from '../components/CartItem'
 import cartjson from '../public/cart-items.json'
 import Link from 'next/link'
@@ -14,6 +14,7 @@ const Home: NextPage = () => {
 
   const [cartItems, setCartItems] = useState(cartjson)
   const [voucherModal, setVoucherModal] = useState(false)
+  const [checked, setChecked] = useState(false)
 
   return (
     <>
@@ -40,6 +41,8 @@ const Home: NextPage = () => {
                     image={item.image}
                     title={item.title}
                     price={item.price}
+                    checked={checked}
+                    setGlobalChecked={setChecked}
                   />
                 )
               })
@@ -49,9 +52,9 @@ const Home: NextPage = () => {
                 Items You May Like
               </div>
 
-              <div className="flex flex-row w-screen py-2 px-2 overflow-y-auto">
+              <div className="flex flex-row w-screen py-2 px-2 gap-4 overflow-y-auto whitespace-nowrap">
 
-                <div className="flex flex-col items-start relative w-36">
+                <div className="flex flex-col items-start relative w-1/3">
                   <Image src="/senheiser.jpg" width={60} height={60} />
                   <a href="#" className="text-blue-400">
                     Senheiser stuff
@@ -62,10 +65,54 @@ const Home: NextPage = () => {
                   </div>
 
                   <div className="absolute right-0 bottom-0">
-                    Hello
+                  <ShoppingOutlined />
                   </div>
                 </div>
 
+                <div className="flex flex-col items-start relative w-1/3">
+                  <Image src="/senheiser.jpg" width={60} height={60} />
+                  <a href="#" className="text-blue-400">
+                    Senheiser stuff
+                  </a>
+                  <div className="flex flex-row items-start text-yellow-600">
+                    <div>S$</div>
+                    <div className="">1200.00</div>
+                  </div>
+
+                  <div className="absolute right-0 bottom-0">
+                  <ShoppingOutlined />
+                  </div>
+                </div>
+                
+                <div className="flex flex-col items-start relative w-1/3">
+                  <Image src="/senheiser.jpg" width={60} height={60} />
+                  <a href="#" className="text-blue-400">
+                    Senheiser stuff
+                  </a>
+                  <div className="flex flex-row items-start text-yellow-600">
+                    <div>S$</div>
+                    <div className="">1200.00</div>
+                  </div>
+
+                  <div className="absolute right-0 bottom-0">
+                  <ShoppingOutlined />
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-start relative w-1/3">
+                  <Image src="/senheiser.jpg" width={60} height={60} />
+                  <a href="#" className="text-blue-400">
+                    Senheiser stuff
+                  </a>
+                  <div className="flex flex-row items-start text-yellow-600">
+                    <div>S$</div>
+                    <div className="">1200.00</div>
+                  </div>
+
+                  <div className="absolute right-0 bottom-0">
+                  <ShoppingOutlined />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -86,7 +133,10 @@ const Home: NextPage = () => {
           </div>
 
           <div className="flex flex-row justify-between items-center border-t border-b py-4 px-2 h-1/2">
-            <div className="font-bold text-xs">
+            <div className={`font-bold text-xs p-2  ${checked ? "bg-yellow-300" :"bg-gray-300"}`}
+            onClick={() => {
+              setChecked(true)
+            }}>
               SELECT ALL
             </div>
 
@@ -95,7 +145,7 @@ const Home: NextPage = () => {
             </div>
 
             <Link href="/payment">
-              <button className="font-bold text-xs px-2 py-2 bg-yellow-300 shadow-xl hover:bg-yellow-400">
+              <button className="font-bold text-xs p-2 bg-yellow-300 shadow-xl hover:bg-yellow-400">
                 CHECKOUT
               </button>
             </Link>
