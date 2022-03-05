@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { LeftOutlined, DownOutlined, ShoppingCartOutlined, ShoppingOutlined } from '@ant-design/icons'
 import CartItem from '../components/CartItem'
@@ -14,7 +14,35 @@ const Home: NextPage = () => {
 
   const [cartItems, setCartItems] = useState(cartjson)
   const [voucherModal, setVoucherModal] = useState(false)
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(true)
+  const [allChecked, setAllChecked] = useState(true)
+  const [checkedArray, setCheckedArray] = useState([true, true, true, true, true, true, true])
+
+  const changeChecked = (index: number) => {
+    console.log("Hello");
+    let arr = checkedArray
+    arr[index] = !arr[index]
+    for (let i = 0; i< arr.length; i++) {
+      if (!arr[i]) {
+        setAllChecked(false)
+        break
+      }
+      if (i == arr.length -1) {
+        setAllChecked(true)
+      }
+    }
+    setCheckedArray(arr)
+  }
+
+  const selectAll = () => {
+    let arr = [true, true, true, true, true, true, true]
+    setCheckedArray(arr)
+  }
+
+  useEffect(() => {
+    console.log(checkedArray);
+    
+  }, [checkedArray, changeChecked])
 
   return (
     <>
@@ -41,8 +69,10 @@ const Home: NextPage = () => {
                     image={item.image}
                     title={item.title}
                     price={item.price}
-                    checked={checked}
-                    setGlobalChecked={setChecked}
+                    checked={checkedArray[index]}
+                    index={index}
+                    changeChecked={changeChecked}
+                    changeDetection={() => setChecked(!checked)}
                   />
                 )
               })
@@ -133,9 +163,9 @@ const Home: NextPage = () => {
           </div>
 
           <div className="flex flex-row justify-between items-center border-t border-b py-4 px-2 h-1/2">
-            <div className={`font-bold text-xs p-2  ${checked ? "bg-yellow-300" :"bg-gray-300"}`}
+            <div className={`font-bold text-xs p-2  ${allChecked ? "bg-yellow-300" :"bg-gray-300"}`}
             onClick={() => {
-              setChecked(true)
+              selectAll()
             }}>
               SELECT ALL
             </div>
