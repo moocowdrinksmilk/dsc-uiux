@@ -2,16 +2,18 @@ import Image from 'next/image'
 import { LeftOutlined, DownOutlined, ShoppingCartOutlined, HomeOutlined, CarOutlined } from '@ant-design/icons'
 import { Switch } from 'antd';
 import numeral from 'numeral';
+import { useRouter } from 'next/router'
 
 
 const Payment = () => {
+    const router = useRouter()
     return (
         <div>
             <div className="bg-black h-20 flex justify-center items-center">
                 <Image src="/amazon.png" height={40} width={80}></Image>
             </div>
             <div className="bg-black w-full flex flex-row justify-between items-center px-5 py-5 sticky top-0 z-10">
-                <LeftOutlined style={{ color: "white" }} height={30} width={30} />
+                <LeftOutlined onClick={() => {router.back()}} style={{ color: "white" }} height={30} width={30} />
                 <h1 className="text-white font-bold text-xl">
                     Confirmation of Details
                 </h1>
