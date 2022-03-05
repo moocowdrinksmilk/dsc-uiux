@@ -65,9 +65,19 @@ const Home: NextPage = () => {
           </div>
       </div>
 
-      <div className="flex flex-col fixed w-full bottom-0 h-20 bg-white">
-          <div className="flex flex-row border-t border-b">
+      <div className="flex flex-col justify-end fixed w-full bottom-0 h-20 bg-white">
+          <div className="flex flex-row justify-between items-center border-t border-b py-4 px-2">
+            <div className="font-bold text-xs">
+              SELECT ALL
+            </div>
 
+            <div className="font-bold text-xs">
+              SUBTOTAL: $2,743.00
+            </div>
+
+            <button className="font-bold text-xs px-2 py-2 bg-yellow-300 shadow-xl hover:bg-yellow-400">
+              CHECKOUT
+            </button>
           </div>
       </div>
       </div>
