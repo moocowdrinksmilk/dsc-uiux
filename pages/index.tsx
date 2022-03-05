@@ -6,6 +6,7 @@ import styles from '../styles/Home.module.css'
 import { LeftOutlined, DownOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import CartItem from '../components/CartItem'
 import cartjson from '../public/cart-items.json'
+import Link from 'next/link'
 
 
 const Home: NextPage = () => {
@@ -75,9 +76,11 @@ const Home: NextPage = () => {
               SUBTOTAL: $2,743.00
             </div>
 
-            <button className="font-bold text-xs px-2 py-2 bg-yellow-300 shadow-xl hover:bg-yellow-400">
-              CHECKOUT
-            </button>
+            <Link href="/payment">
+              <button className="font-bold text-xs px-2 py-2 bg-yellow-300 shadow-xl hover:bg-yellow-400">
+                CHECKOUT
+              </button>
+            </Link>
           </div>
       </div>
       </div>

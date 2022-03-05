@@ -12,6 +12,9 @@ module.exports = {
       xl: '1280px',
       '2xl': '1536px',
     },
+    plugins: [
+      require('@tailwindcss/line-clamp')
+    ],
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
@@ -115,6 +118,7 @@ module.exports = {
       sm: '4px',
       DEFAULT: '8px',
       md: '12px',
+      midaf: '14px',
       lg: '16px',
       xl: '24px',
       '2xl': '40px',
@@ -968,5 +972,4 @@ module.exports = {
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
   },
-  plugins: [],
 }
