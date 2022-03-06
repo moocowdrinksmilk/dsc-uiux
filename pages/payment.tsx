@@ -3,6 +3,7 @@ import { LeftOutlined, DownOutlined, ShoppingCartOutlined, HomeOutlined, CarOutl
 import { Switch } from 'antd';
 import numeral from 'numeral';
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 
 const Payment = () => {
@@ -155,9 +156,11 @@ const Payment = () => {
                     </div>
                 </div>
 
-                <button className="bg-yellow-300 mx-10 py-2 text-xl hover:bg-yellow-400">
-                    Pay
-                </button>
+                <Link href="/checkout">
+                    <button className="bg-yellow-300 mx-10 py-2 text-xl hover:bg-yellow-400">
+                        Pay
+                    </button>
+                </Link>
             </div>
         </div>
     )
