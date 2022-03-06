@@ -87,6 +87,7 @@ const Home: NextPage = () => {
                   cartItems.map((item, index) => {
                     return (
                       <Item 
+                      key={index}
                       image={item.image}
                       title={item.title}
                       price={item.price}
