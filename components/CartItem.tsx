@@ -1,8 +1,8 @@
-import { ShoppingCartOutlined, CheckCircleOutlined, CheckCircleFilled, HeartOutlined, HeartFilled } from "@ant-design/icons"
+import { ShoppingCartOutlined, CheckCircleOutlined, CheckCircleFilled, HeartOutlined, HeartFilled, DeleteOutlined } from "@ant-design/icons"
 import React, { useEffect, useState, useRef } from "react"
 import Image from 'next/image'
 import numeral from 'numeral'
-import { Menu, Dropdown, Button, Space } from 'antd';
+import { Menu, Dropdown, Button, Space, Modal } from 'antd';
 import { DownOutlined } from '@ant-design/icons'
 import { useSwipeable } from 'react-swipeable';
 
@@ -17,12 +17,15 @@ interface Cart {
     changeDetection: () => void
 }
 
+
+
 const CartItem = (props: Cart) => {
 
     const [variation, setVariation] = useState("White")
     const [quantity, setQuantity] = useState(1)
     const [swiped, setSwiped] = useState(false)
     const [wishlist, setWishlist] = useState(false)
+    const [modal, setModal] = useState(false)
     const clickRef = useRef(null)
 
     useEffect(() => {
@@ -80,75 +83,83 @@ const CartItem = (props: Cart) => {
         onSwipedRight: () => slide(false),
         preventDefaultTouchmoveEvent: true,
         trackMouse: true
-      });
+    });
 
 
-    
+
     return (
-        <div {...handlers} className="border-b-2 border-gray-300 py-2 mx-1 flex flex-row justify-between items-center relative bg-white" onBlur={() => {setSwiped(false)}}>
-            <div  ref={clickRef} className={`flex flex-row items-center justify-between w-full transform transition-all ease-in-out duration-300 bg-white z-10 ${swiped ? "-ml-20" : "ml-0"}`}>
-                <div onClick={() => {props.changeChecked(props.index); props.changeDetection()}}>
-                    {
-                        props.checked ?
-                            <CheckCircleFilled style={{ fontSize: '20px' }} />
-                            :
-                            <CheckCircleOutlined style={{ fontSize: '20px' }} />
-                    }
-                </div>
-                <Image src={props.image} width={60} height={60} />
-                <div className="flex flex-col gap-2">
-                    <h2>
-                        {props.title}
-                    </h2>
-                    <div className="flex flex-row justify-between items-center">
-                        <div className="flex flex-col gap-1">
-                            <div className="flex flex-row items-start">
-                                <div>S$</div>
-                                <div className="text-xl font-bold">{numeral(props.price).format('0.00')}</div>
-                            </div>
-                            <div className="text-xs text-gray-500 flex flex-row justify-between pr-4">
-                                <div>Eligible for FREE Delivery</div>
-                                <div onClick={() => {setWishlist(!wishlist)}}>
-                                    {
-                                        !wishlist ? 
-                                        <HeartOutlined />
-                                        :
-                                        <HeartFilled style={{
-                                            color: 'orange'
-                                        }} />
-                                    }
+        <>
+        <Modal okButtonProps={{
+            danger: true
+        }}  visible={modal} title="Are you sure you want to delete this item?" onCancel={() => {setModal(false)}} onOk={() => {setModal(false)}}>
+        </Modal>
+            <div {...handlers} className="border-b-2 border-gray-300 py-2 mx-1 flex flex-row justify-between items-center relative bg-white" onBlur={() => { setSwiped(false) }}>
+                <div ref={clickRef} className={`flex flex-row items-center justify-between w-full transform transition-all ease-in-out duration-300 bg-white z-10 ${swiped ? "-ml-20" : "ml-0"}`}>
+                    <div onClick={() => { props.changeChecked(props.index); props.changeDetection() }}>
+                        {
+                            props.checked ?
+                                <CheckCircleFilled style={{ fontSize: '20px' }} />
+                                :
+                                <CheckCircleOutlined style={{ fontSize: '20px' }} />
+                        }
+                    </div>
+                    <Image src={props.image} width={60} height={60} />
+                    <div className="flex flex-col gap-2">
+                        <h2>
+                            {props.title}
+                        </h2>
+                        <div className="flex flex-row justify-between items-center">
+                            <div className="flex flex-col gap-1">
+                                <div className="flex flex-row items-start">
+                                    <div>S$</div>
+                                    <div className="text-xl font-bold">{numeral(props.price).format('0.00')}</div>
                                 </div>
-                            </div>
-                            <div className="text-xs text-green-600 font-light">
-                                In stock
-                            </div>
-                            <div className="flex flex-row justify-between gap-4">
-                                <div className="flex flex-row gap-2 items-center text-xs">
-                                    <label htmlFor="">Variation</label>
-                                    <Dropdown overlay={variationMenu} trigger={["click"]}>
-                                        <div className="flex flex-row gap-1 items-center px-2 cursor-pointer text-center bg-gray-200">
-                                            {variation} <DownOutlined />
-                                        </div>
-                                    </Dropdown>
+                                <div className="text-xs text-gray-500 flex flex-row justify-between pr-4">
+                                    <div>Eligible for FREE Delivery</div>
+                                    <div onClick={() => { setWishlist(!wishlist) }}>
+                                        {
+                                            !wishlist ?
+                                                <HeartOutlined />
+                                                :
+                                                <HeartFilled style={{
+                                                    color: 'orange'
+                                                }} />
+                                        }
+                                    </div>
                                 </div>
-                                <div className="flex flex-row gap-2 text-xs">
-                                    <label htmlFor="">Quantity</label>
-                                    <Dropdown overlay={quantityMenu} trigger={["click"]}>
-                                        <div className="flex flex-row gap-1 items-center px-5 cursor-pointer text-center bg-gray-200">
-                                            {quantity} <DownOutlined />
-                                        </div>
-                                    </Dropdown>
+                                <div className="text-xs text-green-600 font-light">
+                                    In stock
+                            </div>
+                                <div className="flex flex-row justify-between gap-4">
+                                    <div className="flex flex-row gap-2 items-center text-xs">
+                                        <label htmlFor="">Variation</label>
+                                        <Dropdown overlay={variationMenu} trigger={["click"]}>
+                                            <div className="flex flex-row gap-1 items-center px-2 cursor-pointer text-center bg-gray-200">
+                                                {variation} <DownOutlined />
+                                            </div>
+                                        </Dropdown>
+                                    </div>
+                                    <div className="flex flex-row gap-2 text-xs">
+                                        <label htmlFor="">Quantity</label>
+                                        <Dropdown overlay={quantityMenu} trigger={["click"]}>
+                                            <div className="flex flex-row gap-1 items-center px-5 cursor-pointer text-center bg-gray-200">
+                                                {quantity} <DownOutlined />
+                                            </div>
+                                        </Dropdown>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div className="w-20 bg-red-500 absolute h-20 right-0 z-0">
 
+                <div className="w-20 bg-red-500 absolute h-20 right-0 z-0 flex items-center justify-center" onClick={() => {setModal(true)}}>
+                    <DeleteOutlined style={{
+                        color: 'white'
+                    }} />
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
