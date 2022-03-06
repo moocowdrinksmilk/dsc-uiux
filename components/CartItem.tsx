@@ -1,4 +1,4 @@
-import { ShoppingCartOutlined, CheckCircleOutlined, CheckCircleFilled } from "@ant-design/icons"
+import { ShoppingCartOutlined, CheckCircleOutlined, CheckCircleFilled, HeartOutlined, HeartFilled } from "@ant-design/icons"
 import React, { useEffect, useState, useRef } from "react"
 import Image from 'next/image'
 import numeral from 'numeral'
@@ -22,12 +22,10 @@ const CartItem = (props: Cart) => {
     const [variation, setVariation] = useState("White")
     const [quantity, setQuantity] = useState(1)
     const [swiped, setSwiped] = useState(false)
+    const [wishlist, setWishlist] = useState(false)
     const clickRef = useRef(null)
 
     useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event: any) {
             // @ts-ignore
             if (clickRef.current && !clickRef.current.contains(event.target)) {
@@ -35,10 +33,8 @@ const CartItem = (props: Cart) => {
             }
         }
 
-        // Bind the event listener
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            // Unbind the event listener on clean up
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [clickRef]);
@@ -110,8 +106,18 @@ const CartItem = (props: Cart) => {
                                 <div>S$</div>
                                 <div className="text-xl font-bold">{numeral(props.price).format('0.00')}</div>
                             </div>
-                            <div className="text-xs text-gray-500">
-                                Eligible for FREE Delivery
+                            <div className="text-xs text-gray-500 flex flex-row justify-between pr-4">
+                                <div>Eligible for FREE Delivery</div>
+                                <div onClick={() => {setWishlist(!wishlist)}}>
+                                    {
+                                        !wishlist ? 
+                                        <HeartOutlined />
+                                        :
+                                        <HeartFilled style={{
+                                            color: 'orange'
+                                        }} />
+                                    }
+                                </div>
                             </div>
                             <div className="text-xs text-green-600 font-light">
                                 In stock
