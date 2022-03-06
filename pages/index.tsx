@@ -19,7 +19,6 @@ const Home: NextPage = () => {
   const [checkedArray, setCheckedArray] = useState([true, true, true, true, true, true, true])
 
   const changeChecked = (index: number) => {
-    console.log("Hello");
     let arr = checkedArray
     arr[index] = !arr[index]
     for (let i = 0; i< arr.length; i++) {
@@ -37,11 +36,10 @@ const Home: NextPage = () => {
   const selectAll = () => {
     let arr = [true, true, true, true, true, true, true]
     setCheckedArray(arr)
+    setAllChecked(true)
   }
 
-  useEffect(() => {
-    console.log(checkedArray);
-    
+  useEffect(() => {    
   }, [checkedArray, changeChecked])
 
   return (
@@ -53,7 +51,7 @@ const Home: NextPage = () => {
           <div className="bg-black h-20 flex justify-center items-center">
             <Image className="bg-white" src="/amazon.svg" height={40} width={80}></Image>
           </div>
-          <div className="bg-black w-full flex flex-row justify-between items-center px-5 py-5 sticky top-0 z-10">
+          <div className="bg-black w-full flex flex-row justify-between items-center px-5 py-5 sticky top-0 z-30">
             <LeftOutlined style={{ color: "white" }} height={30} width={30} />
             <h1 className="text-white font-bold text-xl">
               MY CART
@@ -148,7 +146,7 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <div className="flex flex-col justify-end fixed w-full bottom-0 h-36 bg-white">
+        <div className="flex flex-col justify-end fixed w-full bottom-0 h-36 bg-white z-30">
           <div className="flex flex-row items-center justify-between items-center border-t border-b py-4 px-2 h-1/2">
             <div className="font-bold text-xs">
               Bank Exclusive Vouchers
