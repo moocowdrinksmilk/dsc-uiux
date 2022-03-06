@@ -6,39 +6,39 @@
         "variation": ["white", "black"]
     },
     {
-        "image": "/senheiser.jpg",
-        "title": "Sennheiser Headphones P1211",
-        "price": 422.80,
+        "image": "/airpurifier.jpg",
+        "title": "Nowell Air Purifier",
+        "price": 234.20,
         "variation": ["white", "black"]
     },
     {
-        "image": "/senheiser.jpg",
-        "title": "Sennheiser Headphones P1211",
-        "price": 422.80,
+        "image": "/controller.jpg",
+        "title": "XBOX One Controllers",
+        "price": 122.20,
         "variation": ["white", "black"]
     },
     {
-        "image": "/senheiser.jpg",
-        "title": "Sennheiser Headphones P1211",
-        "price": 422.80,
+        "image": "/earphones.jpg",
+        "title": "TWS earbuds",
+        "price": 40.80,
         "variation": ["white", "black"]
     },
     {
-        "image": "/senheiser.jpg",
-        "title": "Sennheiser Headphones P1211",
-        "price": 422.80,
+        "image": "/pillow.jpg",
+        "title": "Simmons Aquagel Pillow",
+        "price": 92.80,
         "variation": ["white", "black"]
     },
     {
-        "image": "/senheiser.jpg",
-        "title": "Sennheiser Headphones P1211",
-        "price": 422.80,
+        "image": "/ricecooker.jpg",
+        "title": "Rice Cooker",
+        "price": 182.80,
         "variation": ["white", "black"]
     },
     {
-        "image": "/senheiser.jpg",
-        "title": "Sennheiser Headphones P1211",
-        "price": 422.80,
+        "image": "/umbrella.jpg",
+        "title": "Auto Umbrella 100% waterproof",
+        "price": 12.80,
         "variation": ["white", "black"]
     }
 ]

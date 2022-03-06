@@ -8,6 +8,7 @@ import CartItem from '../components/CartItem'
 import cartjson from '../public/cart-items.json'
 import Link from 'next/link'
 import VoucherModal from '../components/VoucherModal'
+import Item from '../components/Item'
 
 
 const Home: NextPage = () => {
@@ -80,67 +81,21 @@ const Home: NextPage = () => {
                 Items You May Like
               </div>
 
-              <div className="flex flex-row w-screen py-2 px-2 gap-4 overflow-y-auto whitespace-nowrap">
+              <div className="flex flex-row w-screen py-2 px-2 gap-4 overflow-y-auto">
 
-                <div className="flex flex-col items-start relative w-1/3">
-                  <Image src="/senheiser.jpg" width={60} height={60} />
-                  <a href="#" className="text-blue-400">
-                    Senheiser stuff
-                  </a>
-                  <div className="flex flex-row items-start text-yellow-600">
-                    <div>S$</div>
-                    <div className="">1200.00</div>
-                  </div>
+                {
+                  cartItems.map((item, index) => {
+                    return (
+                      <Item 
+                      image={item.image}
+                      title={item.title}
+                      price={item.price}
+                      />
+                    )
+                  })
+                }
 
-                  <div className="absolute right-0 bottom-0">
-                  <ShoppingOutlined />
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start relative w-1/3">
-                  <Image src="/senheiser.jpg" width={60} height={60} />
-                  <a href="#" className="text-blue-400">
-                    Senheiser stuff
-                  </a>
-                  <div className="flex flex-row items-start text-yellow-600">
-                    <div>S$</div>
-                    <div className="">1200.00</div>
-                  </div>
-
-                  <div className="absolute right-0 bottom-0">
-                  <ShoppingOutlined />
-                  </div>
-                </div>
-                
-                <div className="flex flex-col items-start relative w-1/3">
-                  <Image src="/senheiser.jpg" width={60} height={60} />
-                  <a href="#" className="text-blue-400">
-                    Senheiser stuff
-                  </a>
-                  <div className="flex flex-row items-start text-yellow-600">
-                    <div>S$</div>
-                    <div className="">1200.00</div>
-                  </div>
-
-                  <div className="absolute right-0 bottom-0">
-                  <ShoppingOutlined />
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start relative w-1/3">
-                  <Image src="/senheiser.jpg" width={60} height={60} />
-                  <a href="#" className="text-blue-400">
-                    Senheiser stuff
-                  </a>
-                  <div className="flex flex-row items-start text-yellow-600">
-                    <div>S$</div>
-                    <div className="">1200.00</div>
-                  </div>
-
-                  <div className="absolute right-0 bottom-0">
-                  <ShoppingOutlined />
-                  </div>
-                </div>
+              
               </div>
             </div>
           </div>
